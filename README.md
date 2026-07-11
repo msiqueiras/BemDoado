@@ -17,40 +17,6 @@ entradas e saídas de bolsas de sangue e gerenciar dados dos doadores.
 ![logo_bem_doado](logo_bemdoado.jpg)
 
 ---
-## Requisitos do sistema
-
-### Requisitos Funcionais
-
-* RF01 - Cadastrar Doador
-* RF02 - Consultar Doador
-* RF03 - Atualizar dados do doador
-* RF04 - Verificar aptidão para doação
-* RF05 - Registrar doação 
-* RF06 - Registrar saída de sangue
-* RF07 - Consultar estoque
-* RF08 - Emitir alerta de estoque baixo
-* RF09 - Consultar histórico de doação de um doador
-* RF10 - Consultar movimentações do estoque
-
-### Requisitos Não Funcionais
-
-* RNF01 - O sistema deve ser desenvolvido em Java 21
-* RNF02 - O sistema deve utilizar Programação Orientada a Objetos
-* RNF03 - A interface deve ser executada em console
-
-### Regras de Negócio
-
-* RN01 - O doador deve possuir mais de 16 anos
-* RN02 - Em caso de doador menor de idade, o doador precisa possuir autorização formal do responsável
-* RN03 - O doador deve possuir até 69 anos de idade
-* RN04 - O doador deve possuir mais de 50kg
-* RN05 - O doador regular só pode doar de 2 em 2 meses se for do sexo masculino, 3 em 3 meses se for do sexo feminino
-* RN06 - Não pode existir mais de um doador com o mesmo CPF
-* RN07 - O estoque nunca pode ser menor que zero
-* RN08 - Uma bolsa retirada deve existir no estoque
-* RN09 - Um doador só pode doar se for considerado APTO
-* RN10 – Cada doação registrada deve atualizar automaticamente o estoque do tipo sanguíneo correspondente
-----
 
 ## Documentação e organização do projeto
 A documentação do projeto está na pasta `docs` e conta com os artefatos de diagramação de casos de uso, de classes e de 
@@ -70,14 +36,6 @@ BemDoado/
 │   │   ├── Doacao.java
 │   │   ├── ...
 │   │   
-│   ├── service/
-│   │   ├── DoadorService.java
-│   │   ├── DoacaoService.java
-│   │   ├── EstoqueService.java
-│   │   ├── ...
-│   │
-│   ├── repository/
-│   │
 │   └── view/
 │       └── Menu.java
 │
