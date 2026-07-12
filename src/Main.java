@@ -1,18 +1,16 @@
 
 
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 import model.Doador;
 import model.Estoque;
 import model.ResultadoAptidao;
 import model.Sexo;
 import model.TipoSanguineo;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import util.EntradaUtils;
 
 public class Main {
     public static void main(String[] args) {
@@ -23,9 +21,6 @@ public class Main {
         List<Doador> listaDoadores = new ArrayList<>();
         int opcao = 0;
         
-        // Formatador para a data de nascimento
-        DateTimeFormatter formatadorData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
         System.out.println("=== Bem-vindo ao sistema BemDoado! ===");
 
         while (opcao != 4) {
@@ -53,9 +48,8 @@ public class Main {
 
                         System.out.print("CPF (apenas números): ");
                         String cpf = scanner.nextLine();
-
-                        System.out.print("Data de Nascimento (dd/mm/aaaa): ");
-                        LocalDate dataNascimento = LocalDate.parse(scanner.nextLine(), formatadorData);
+                        
+                        LocalDate dataNascimento = EntradaUtils.lerData(scanner);
 
                         System.out.print("Sexo (MASCULINO ou FEMININO): ");
                         Sexo sexo = Sexo.valueOf(scanner.nextLine().toUpperCase());
@@ -87,8 +81,6 @@ public class Main {
                         
                         System.out.println("✅ Doador '" + novoDoador.getNome() + "' cadastrado com sucesso!");
 
-                    } catch (DateTimeParseException e) {
-                        System.out.println("❌ Erro: Formato de data inválido. Use dd/mm/aaaa.");
                     } catch (IllegalArgumentException e) {
                         System.out.println("❌ Erro: Algum dos valores digitados (Sexo, Tipo Sanguíneo ou Aptidão) está incorreto. Preste atenção no texto de exemplo.");
                     }
