@@ -1,3 +1,4 @@
+package model;
 public enum TipoSanguineo{
     A_POSITIVO,
     A_NEGATIVO,
