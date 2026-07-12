@@ -1,9 +1,12 @@
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 public class Doador extends Pessoa{
     private TipoSanguineo tipoSanguineo;
     private double peso;
     private ResultadoAptidao condicaoTriagem;
     private boolean autorizacao;
-    private List<Doacao> doacoes = new ArrayList<>();
+    private ArrayList<Doacao> doacoes = new ArrayList<>();
 
     public Doador(
             String nome,
@@ -27,7 +30,7 @@ public class Doador extends Pessoa{
     }
 
     public boolean possuiAutorizacao() {
-        int idade = calcularIdade();
+        int idade = calcularIdadeAtual();
 
         if (idade == 16 || idade == 17) {
             return autorizacao;
