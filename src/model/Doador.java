@@ -1,6 +1,8 @@
 package model;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
+
 
 public class Doador extends Pessoa{
     private TipoSanguineo tipoSanguineo;
@@ -62,4 +64,38 @@ public class Doador extends Pessoa{
         return true;
     }
 
+    public void realizarDoacao( boolean votoAutoExclusao, boolean intercorrencias, Estoque estoqueAtual) {
+        if (!estaApto()) {
+            System.out.println(" O doador " + super.getNome() + " não está apto para doar sangue no momento.");
+            return;
+        }
+        Doacao novaDoacao = new Doacao(LocalDate.now(), votoAutoExclusao, intercorrencias);
+        this.doacoes.add(novaDoacao);
+        System.out.println("Doação registrada com sucesso para o doador: " + super.getNome());
+        
+        if (!votoAutoExclusao && !intercorrencias) {
+            String idBolsa = "B-" + super.getCpf().substring(0,3) + "-" + doacoes.size();
+
+            BolsaSangue novaBolsa = new BolsaSangue(idBolsa, this.tipoSanguineo, 450, 35);
+
+            estoqueAtual.adicionarBolsa(novaBolsa);
+        }
+        else {
+            System.out.println("ATENÇÃO: A bolsa de sangue foi descartada por motivos de segurança (Autoexclusão/Intercorrência).");
+        }
+    }
+
+    public TipoSanguineo getTipoSanguineo() { return tipoSanguineo; }
+    public void setTipoSanguineo(TipoSanguineo tipoSanguineo) { this.tipoSanguineo = tipoSanguineo; }
+
+    public double getPeso() { return peso; }
+    public void setPeso(double peso) { this.peso = peso; }
+
+    public ResultadoAptidao getCondicaoTriagem() { return condicaoTriagem; }
+    public void setCondicaoTriagem(ResultadoAptidao condicaoTriagem) { this.condicaoTriagem = condicaoTriagem; }
+
+    public boolean isAutorizacao() { return autorizacao; }
+    public void setAutorizacao(boolean autorizacao) { this.autorizacao = autorizacao; }
+
+    public List<Doacao> getDoacoes() { return doacoes; }
 }

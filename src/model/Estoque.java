@@ -6,44 +6,51 @@ public class Estoque {
     
     private List<BolsaSangue> bolsas;
     private int estoqueMinimo;
-
-    // Construtor
+    
     public Estoque(int estoqueMinimo) {
         this.bolsas = new ArrayList<>();
         this.estoqueMinimo = estoqueMinimo;
     }
-
-    // Métodos definidos no diagrama
+    
+    public int consultarEstoque(TipoSanguineo tipo) {
+        int quantidade = 0;
+        for (BolsaSangue bolsa : this.bolsas) {
+            if (bolsa.getTipoSanguineo() == tipo) {
+                quantidade ++;
+            }
+        }
+        return quantidade;
+    }
+    
     public void emitirAlerta() {
-        //Lógica para verificar se a quantidade de bolsas está abaixo do estoqueMinimo e emitir um aviso
+       if (this.bolsas.size() < this.estoqueMinimo) {
+        System.out.println("ALERTA: o estoque geral de sangue está abaixo do mínimo exigido! ");
+        System.out.println(" -> Total atual: " + this.bolsas.size() + " bolsas | Mínimo exigido: " + this.estoqueMinimo + " bolsas.");
+       }
     }
+    
+        public void adicionarBolsa(BolsaSangue bolsa) {
+            this.bolsas.add(bolsa); 
+            System.out.println("Bolsa " + bolsa.getIdentificadorBolsa() + " adicionada com sucesso ao estoque!");
+        }
 
-    public void consultarEstoque(TipoSanguineo tipo) {
-        //Lógica para contar e retornar quantas bolsas existem de um determinado TipoSanguineo
-    }
-
-    public void adicionarBolsa(BolsaSangue bolsa) {
-        this.bolsas.add(bolsa);
-    }
 
     public void removerBolsa(BolsaSangue bolsa) {
-        this.bolsas.remove(bolsa);
+        if (this.bolsas.contains(bolsa)) {
+            this.bolsas.remove(bolsa);
+            System.out.println(" Saída de bolsa " + bolsa.getIdentificadorBolsa() + " registrada.");
+
+            emitirAlerta();
+        } 
+        else {
+            System.out.println("Erro: Esta bolsa não foi encontrada no estoque.");
+        }
     }
 
     // Getters e Setters
-    public List<BolsaSangue> getBolsas() {
-        return bolsas;
-    }
+    public List<BolsaSangue> getBolsas() { return bolsas; }
+    public void setBolsas(List<BolsaSangue> bolsas) { this.bolsas = bolsas; }
 
-    public void setBolsas(List<BolsaSangue> bolsas) {
-        this.bolsas = bolsas;
-    }
-
-    public int getEstoqueMinimo() {
-        return estoqueMinimo;
-    }
-
-    public void setEstoqueMinimo(int estoqueMinimo) {
-        this.estoqueMinimo = estoqueMinimo;
-    }
+    public int getEstoqueMinimo() { return estoqueMinimo; }
+    public void setEstoqueMinimo(int estoqueMinimo) { this.estoqueMinimo = estoqueMinimo; }
 }
