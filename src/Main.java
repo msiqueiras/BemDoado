@@ -1,6 +1,5 @@
 
 
-import java.time.LocalDate;
 
 import model.Doador;
 import model.Estoque;
@@ -8,23 +7,125 @@ import model.ResultadoAptidao;
 import model.Sexo;
 import model.TipoSanguineo;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Inicializar os dados base do sistema
+        Estoque estoqueHemocentro = new Estoque(5);
+        List<Doador> listaDoadores = new ArrayList<>();
+        int opcao = 0;
+        
+        // Formatador para a data de nascimento
+        DateTimeFormatter formatadorData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
         System.out.println("=== Bem-vindo ao sistema BemDoado! ===");
 
-        Estoque estoqueHemocentro = new Estoque(5);
+        while (opcao != 4) {
+            System.out.println("\n----------------------------------");
+            System.out.println("          MENU PRINCIPAL          ");
+            System.out.println("----------------------------------");
+            System.out.println("1 - Cadastrar Doador");
+            System.out.println("2 - Registrar Doação");
+            System.out.println("3 - Consultar Estoque de Sangue");
+            System.out.println("4 - Sair do Sistema");
+            System.out.print("Escolha uma opção: ");
 
-        Doador doadorBruno = new Doador(
-            "Bruno Farias Amaral", "12345678900", LocalDate.of(2003, 5, 15), 
-            Sexo.MASCULINO, "Rua UFPA, 123", "91999999999", "bruno@email.com", 
-            TipoSanguineo.A_POSITIVO, 75.0, ResultadoAptidao.APTO, true
-        );
+            try {
+                opcao = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                opcao = 0; 
+            }
 
-        System.out.println("\n--- Iniciando Doação ---");
-        doadorBruno.realizarDoacao(false, false, estoqueHemocentro);
+            switch (opcao) {
+                case 1:
+                    System.out.println("\n--- Cadastro de Novo Doador ---");
+                    try {
+                        System.out.print("Nome completo: ");
+                        String nome = scanner.nextLine();
+
+                        System.out.print("CPF (apenas números): ");
+                        String cpf = scanner.nextLine();
+
+                        System.out.print("Data de Nascimento (dd/mm/aaaa): ");
+                        LocalDate dataNascimento = LocalDate.parse(scanner.nextLine(), formatadorData);
+
+                        System.out.print("Sexo (MASCULINO ou FEMININO): ");
+                        Sexo sexo = Sexo.valueOf(scanner.nextLine().toUpperCase());
+
+                        System.out.print("Endereço: ");
+                        String endereco = scanner.nextLine();
+
+                        System.out.print("Telefone: ");
+                        String telefone = scanner.nextLine();
+
+                        System.out.print("Email: ");
+                        String email = scanner.nextLine();
+
+                        System.out.print("Tipo Sanguíneo (Ex: A_POSITIVO, O_NEGATIVO): ");
+                        TipoSanguineo tipoSanguineo = TipoSanguineo.valueOf(scanner.nextLine().toUpperCase());
+
+                        System.out.print("Peso (kg): ");
+                        double peso = Double.parseDouble(scanner.nextLine());
+
+                        System.out.print("Condição de Triagem (APTO, INAPTO_TEMPORARIO, INAPTO_PERMANENTE): ");
+                        ResultadoAptidao aptidao = ResultadoAptidao.valueOf(scanner.nextLine().toUpperCase());
+
+                        System.out.print("Possui autorização de um responsável? (true ou false): ");
+                        boolean autorizacao = Boolean.parseBoolean(scanner.nextLine());
+
+                        // Cria o objeto doador com os dados digitados
+                        Doador novoDoador = new Doador(nome, cpf, dataNascimento, sexo, endereco, telefone, email, tipoSanguineo, peso, aptidao, autorizacao);
+                        listaDoadores.add(novoDoador);
+                        
+                        System.out.println("✅ Doador '" + novoDoador.getNome() + "' cadastrado com sucesso!");
+
+                    } catch (DateTimeParseException e) {
+                        System.out.println("❌ Erro: Formato de data inválido. Use dd/mm/aaaa.");
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("❌ Erro: Algum dos valores digitados (Sexo, Tipo Sanguíneo ou Aptidão) está incorreto. Preste atenção no texto de exemplo.");
+                    }
+                    break;
+
+                case 2:
+                    System.out.println("\n[2] A Registar Doação...");
+                    if (listaDoadores.isEmpty()) {
+                        System.out.println("❌ Nenhum doador cadastrado no sistema. Por favor, utilize a Opção 1 primeiro.");
+                    } else {
+                        // Para simplificar, pega o último doador cadastrado
+                        Doador doadorAtual = listaDoadores.get(listaDoadores.size() - 1);
+                        System.out.println("Iniciando doação para: " + doadorAtual.getNome());
+                        doadorAtual.realizarDoacao(false, false, estoqueHemocentro);
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("\n[3] A Consultar Estoque...");
+                    System.out.println("Total de bolsas no estoque geral: " + estoqueHemocentro.getBolsas().size());
+                    System.out.println("-> Bolsas A+: " + estoqueHemocentro.consultarEstoque(TipoSanguineo.A_POSITIVO));
+                    System.out.println("-> Bolsas O+: " + estoqueHemocentro.consultarEstoque(TipoSanguineo.O_POSITIVO));
+                    
+                    // Verifica se o alerta precisa de disparar
+                    estoqueHemocentro.emitirAlerta();
+                    break;
+
+                case 4:
+                    System.out.println("\nA encerrar o sistema BemDoado... Obrigado e até logo!");
+                    break;
+
+                default:
+                    System.out.println("\n❌ Opção inválida. Por favor, introduz um número de 1 a 4.");
+                    break;
+            }
+        }
         
-        System.out.println("\n--- Resumo do Estoque ---");
-        int quantidadeBolsasA = estoqueHemocentro.consultarEstoque(TipoSanguineo.A_POSITIVO);
-        System.out.println("Quantidade de bolsas A+ disponíveis: " + quantidadeBolsasA);
+        scanner.close(); 
     }
 }
