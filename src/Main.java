@@ -62,8 +62,7 @@ public class Main {
 
                         double peso = EntradaUtils.lerPeso(scanner);
 
-                        System.out.print("Condição de Triagem (APTO, INAPTO_TEMPORARIO, INAPTO_PERMANENTE): ");
-                        ResultadoAptidao aptidao = ResultadoAptidao.valueOf(scanner.nextLine().toUpperCase());
+                        ResultadoAptidao aptidao = EntradaUtils.lerResultadoAptidao(scanner);
 
                         System.out.print("Possui autorização de um responsável? (true ou false): ");
                         boolean autorizacao = Boolean.parseBoolean(scanner.nextLine());

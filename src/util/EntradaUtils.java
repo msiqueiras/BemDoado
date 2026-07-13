@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+
+import model.ResultadoAptidao;
 import model.Sexo;
 import model.TipoSanguineo;
 
@@ -206,7 +208,7 @@ public class EntradaUtils {
     
     while (!valido) {
         try {
-            System.out.println("Peso (kg): ");
+            System.out.print("Peso (kg): ");
             peso = Double.parseDouble(scanner.nextLine());
 
             valido = true;
@@ -221,4 +223,25 @@ public class EntradaUtils {
     return peso;
     }
 
+    public static ResultadoAptidao lerResultadoAptidao(Scanner scanner) {
+    ResultadoAptidao resultadoAptidao = null;
+    boolean valido = false;
+
+    while (!valido) {
+        try {
+            // Recebe String com scanner, remove espaços extra e deixa tudo em maiusculo 
+            System.out.print("Condição de Triagem (APTO, INAPTO_TEMPORARIO, INAPTO_PERMANENTE): ");
+            resultadoAptidao = ResultadoAptidao.valueOf(scanner.nextLine().trim().toUpperCase());
+
+            valido = true;
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro: valor invalido. Tente novamente.\n");
+        } catch (Exception e) {
+            // Captura qualquer outra exceção inesperada
+            System.out.println("Erro inesperado: " + e.getMessage() + " Tente novamente.");
+        }
+    }
+    return resultadoAptidao;
+    }
 }
