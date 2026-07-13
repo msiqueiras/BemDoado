@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import model.Sexo;
+import model.TipoSanguineo;
 
 public class EntradaUtils {
 
@@ -106,6 +107,62 @@ public class EntradaUtils {
         }
     }
     return sexo;
+    }
+
+    public static String lerTelefone(Scanner scanner) {
+    String telefone = "";
+    boolean valido = false;
+
+    while (!valido) {
+        try {
+            System.out.print("Numero de Telefone (ex: 21988887777): ");
+            telefone = scanner.nextLine().trim(); // Le a linha e remove espaços extra
+
+            // Verifica se contém apenas números
+            boolean apenasNumeros = telefone.matches("^[0-9]+$");
+
+            // Validações: não vazio, 11 caracteres e apenas números
+            if (telefone.isEmpty()) {
+                throw new IllegalArgumentException("O Telefone não pode ser vazio.");
+            } else if (telefone.length() != 11) {
+                throw new IllegalArgumentException("O Telefone deve ter exatamente 11 dígitos (DDD + numero.)");
+            } else if (!apenasNumeros) {
+                throw new IllegalArgumentException("O Telefone deve conter apenas números (0-9).");
+            }
+
+            valido = true;
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro: " + e.getMessage());
+            System.out.println("Tente novamente.");
+        } catch (Exception e) {
+            System.out.println("Erro inesperado: " + e.getMessage());
+            System.out.println("Tente novamente.");
+        }
+    }
+    return telefone;
+    }
+
+    public static TipoSanguineo lerTipoSanguineo(Scanner scanner) {
+    TipoSanguineo tipoSanguineo = null;
+    boolean valido = false;
+
+    while (!valido) {
+        try {
+            // Recebe String com scanner, remove espaços extra e deixa tudo em maiusculo 
+            System.out.print("Tipo Sanguíneo (Ex: A_POSITIVO, O_NEGATIVO): ");
+            tipoSanguineo = TipoSanguineo.valueOf(scanner.nextLine().trim().toUpperCase());
+
+            valido = true; 
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro: valor invalido. Tente novamente.\n");
+        } catch (Exception e) {
+            // Captura qualquer outra exceção inesperada
+            System.out.println("Erro inesperado: " + e.getMessage() + " Tente novamente.");
+        }
+    }
+    return tipoSanguineo;
     }
 
 }

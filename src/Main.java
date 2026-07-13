@@ -54,14 +54,12 @@ public class Main {
                         System.out.print("Endereço: ");
                         String endereco = scanner.nextLine();
 
-                        System.out.print("Telefone: ");
-                        String telefone = scanner.nextLine();
+                        String telefone = EntradaUtils.lerTelefone(scanner);
 
                         System.out.print("Email: ");
                         String email = scanner.nextLine();
 
-                        System.out.print("Tipo Sanguíneo (Ex: A_POSITIVO, O_NEGATIVO): ");
-                        TipoSanguineo tipoSanguineo = TipoSanguineo.valueOf(scanner.nextLine().toUpperCase());
+                        TipoSanguineo tipoSanguineo = EntradaUtils.lerTipoSanguineo(scanner);
 
                         System.out.print("Peso (kg): ");
                         double peso = Double.parseDouble(scanner.nextLine());
