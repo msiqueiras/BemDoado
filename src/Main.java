@@ -49,8 +49,7 @@ public class Main {
                         
                         LocalDate dataNascimento = EntradaUtils.lerData(scanner);
 
-                        System.out.print("Sexo (MASCULINO ou FEMININO): ");
-                        Sexo sexo = Sexo.valueOf(scanner.nextLine().toUpperCase());
+                        Sexo sexo = EntradaUtils.lerSexo(scanner);
 
                         System.out.print("Endereço: ");
                         String endereco = scanner.nextLine();
