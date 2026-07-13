@@ -38,11 +38,29 @@ public class Pessoa{
         return Period.between(dataNascimento, LocalDate.now()).getYears();
     }
 
-    public String getNome() { return nome; }
-    public String getCpf() { return cpf; }
-    public LocalDate getDataNascimento() { return dataNascimento; }
-    public Sexo getSexo() { return sexo; }
-    public String getEndereco() { return endereco; }
-    public String getTelefone() { return telefone; }
-    public String getEmail() { return email; }
+    public String getNome() {
+        return nome;
+    }
+    public String getCpf() {
+        return cpf;
+    }
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public Sexo getSexo() {
+        return sexo;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+    public String getEmail() {
+        return email;
+    }
 }
