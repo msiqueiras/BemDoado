@@ -43,11 +43,9 @@ public class Main {
                 case 1:
                     System.out.println("\n--- Cadastro de Novo Doador ---");
                     try {
-                        System.out.print("Nome completo: ");
-                        String nome = scanner.nextLine();
+                        String nome = EntradaUtils.lerNome(scanner);
 
-                        System.out.print("CPF (apenas números): ");
-                        String cpf = scanner.nextLine();
+                        String cpf = EntradaUtils.lerCPF(scanner);
                         
                         LocalDate dataNascimento = EntradaUtils.lerData(scanner);
 

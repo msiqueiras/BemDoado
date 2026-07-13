@@ -24,6 +24,69 @@ public class EntradaUtils {
         }
     }
 
+    public static String lerNome(Scanner scanner) {
+    String nome = "";
+    boolean valido = false;
+
+    while (!valido) {
+        try {
+            System.out.print("Nome completo: ");
+            nome = scanner.nextLine().trim();   // lê a linha toda e remove espaços extras
+
+            // Se a string estiver vazia, lança uma exceção
+            if (nome.isEmpty()) {
+                throw new IllegalArgumentException("Nome não pode ser vazio.");
+            }
+
+            valido = true;  // saída do loop se não houve exceção
+
+        } catch (IllegalArgumentException e) {
+            // Captura a exceção de string vazia e informa o usuário
+            System.out.println("Erro: " + e.getMessage() + " Tente novamente.");
+        } catch (Exception e) {
+            // Captura qualquer outra exceção inesperada 
+            System.out.println("Erro inesperado: " + e.getMessage() + " Tente novamente.");
+        }
+    }
+
+    return nome;
+    }
+
     
+    public static String lerCPF(Scanner scanner) {
+    String cpf = "";
+    boolean valido = false;
+
+    while (!valido) {
+        try {
+            System.out.print("Digite o CPF (apenas números, 11 dígitos): ");
+            cpf = scanner.nextLine().trim();   // lê a linha toda e remove espaços extras
+
+            // Verifica se contém apenas números
+            boolean apenasNumeros = cpf.matches("^[0-9]+$");
+            
+            // Validações: não vazio, 11 caracteres e apenas números
+            if (cpf.isEmpty()) {
+                throw new IllegalArgumentException("CPF não pode ser vazio.");
+            } else if (cpf.length() != 11) {
+                throw new IllegalArgumentException("CPF deve ter exatamente 11 dígitos. Você digitou " + cpf.length() + " caracteres.");
+            } else if (!apenasNumeros) {
+                throw new IllegalArgumentException("CPF deve conter apenas números (0-9).");
+            }
+
+            valido = true;  // saída do loop se não houve exceção
+
+        } catch (IllegalArgumentException e) {
+            // Captura a exceção de validação e informa o usuário
+            System.out.println("Erro: " + e.getMessage() + " Tente novamente.");
+        } catch (Exception e) {
+            // Captura qualquer outra exceção inesperada
+            System.out.println("Erro inesperado: " + e.getMessage() + " Tente novamente.");
+        }
+    }
+
+    return cpf;
+    }
+        
 
 }
