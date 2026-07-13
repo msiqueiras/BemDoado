@@ -56,13 +56,11 @@ public class Main {
 
                         String telefone = EntradaUtils.lerTelefone(scanner);
 
-                        System.out.print("Email: ");
-                        String email = scanner.nextLine();
+                        String email = EntradaUtils.lerEmail(scanner);
 
                         TipoSanguineo tipoSanguineo = EntradaUtils.lerTipoSanguineo(scanner);
 
-                        System.out.print("Peso (kg): ");
-                        double peso = Double.parseDouble(scanner.nextLine());
+                        double peso = EntradaUtils.lerPeso(scanner);
 
                         System.out.print("Condição de Triagem (APTO, INAPTO_TEMPORARIO, INAPTO_PERMANENTE): ");
                         ResultadoAptidao aptidao = ResultadoAptidao.valueOf(scanner.nextLine().toUpperCase());

@@ -143,6 +143,41 @@ public class EntradaUtils {
     return telefone;
     }
 
+    public static String lerEmail(Scanner scanner) {
+    // Expressao regular que garante que o email esteja em um formato aceitavel
+    // Sem espaços em branco, algo antes e depois do arroba, apenas um arroba e o ponto de dominio
+    String REGEX_EMAIL = "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$";
+
+    String email = "";
+    boolean valido = false;
+
+    while (!valido) {
+        try {
+            System.out.print("Email (ex: exemplo1@gmail.com): ");
+            email = scanner.nextLine().trim(); // Le o texto e remove espaços extra
+
+            boolean formatoValido = email.matches(REGEX_EMAIL); // Verifica o formato do email
+
+            // Validaçoes: não vazio e formato
+            if (email.isEmpty()){
+                throw new IllegalArgumentException("O Email nao pode estar vazio.");
+            } else if (!formatoValido) {
+                throw new IllegalArgumentException("O Email informado nao esta no formato adequado.");
+            }
+
+            valido = true;
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro: " + e.getMessage());
+            System.out.println("Tente novamente.");
+        } catch (Exception e) {
+            System.out.println("Erro inesperado: " + e.getMessage());
+            System.out.println("Tente novamente.");
+        }
+    }
+    return email;
+    } 
+
     public static TipoSanguineo lerTipoSanguineo(Scanner scanner) {
     TipoSanguineo tipoSanguineo = null;
     boolean valido = false;
@@ -163,6 +198,27 @@ public class EntradaUtils {
         }
     }
     return tipoSanguineo;
+    }
+
+    public static Double lerPeso(Scanner scanner) {
+    Double peso = null;
+    boolean valido = false;
+    
+    while (!valido) {
+        try {
+            System.out.println("Peso (kg): ");
+            peso = Double.parseDouble(scanner.nextLine());
+
+            valido = true;
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro: valor invalido. Tente novamente.");
+        } catch (Exception e) {
+            // Captura qualquer outra exceção inesperada
+            System.out.println("Erro inesperado: " + e.getMessage() + " Tente novamente.");
+        }
+    }
+    return peso;
     }
 
 }
