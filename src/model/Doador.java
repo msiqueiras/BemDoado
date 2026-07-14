@@ -122,7 +122,7 @@ public class Doador extends Pessoa{
         return peso;
     }
 
-    public void setPeso(double peso) {
+    public void atualizarPeso(double peso) {
         this.peso = peso;
     }
 

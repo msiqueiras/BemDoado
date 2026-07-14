@@ -8,6 +8,7 @@ import model.ResultadoAptidao;
 import model.Sexo;
 import model.TipoSanguineo;
 import util.EntradaUtils;
+import views.Menu;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,17 +19,21 @@ public class Main {
         List<Doador> listaDoadores = new ArrayList<>();
         int opcao = 0;
 
+        public Doador buscarDoadorPorCPF(List<Doador> listaDoadores, String cpf){
+            for (Doador doador : listaDoadores){
+                if (cpf.equals(doador.getCpf())) {
+                        return doador;
+                }
+            }
+            return null;
+        }
+
+
         System.out.println("=== Bem-vindo ao sistema BemDoado! ===");
 
         while (opcao != 5) {
-            System.out.println("\n----------------------------------");
-            System.out.println("          MENU PRINCIPAL          ");
-            System.out.println("----------------------------------");
-            System.out.println("1 - Cadastrar Doador");
-            System.out.println("2 - Registrar Doação");
-            System.out.println("3 - Consultar Estoque de Sangue");
-            System.out.println("4 - Sair do Sistema");
-            System.out.print("Escolha uma opção: ");
+
+            Menu.exibirMenuPrincipal();
 
             try {
                 opcao = Integer.parseInt(scanner.nextLine());
@@ -97,12 +102,55 @@ public class Main {
                     estoqueHemocentro.emitirAlerta();
                     break;
 
+                case 4:
+                    int opcao_doador = 0;
+                    while (opcao_doador < 3 && opcao_doador >= 0) {
+                        System.out.println("\n[4] Informe CPF do doador:");
+                        String cpf = EntradaUtils.lerCPF(scanner);
+                        for (Doador doador : listaDoadores) {
+                            if (cpf.equals(doador.getCpf())) {
+                                System.out.println("\n ===== DOADOR ENCONTRADO =====");
+                                System.out.println("Nome: " + doador.getNome());
+                                System.out.println("CPF: " + doador.getCpf());
+                                System.out.println("\n =============================");
+
+                                Menu.exibirMenuDoador();
+
+                                try {
+                                    opcao_doador = Integer.parseInt(scanner.nextLine());
+                                } catch (NumberFormatException e) {
+                                    opcao_doador = 0;
+                                }
+
+                                if (opcao_doador == 1) {
+                                    System.out.println("===== FICHA DE DOADOR =====");
+                                    System.out.println("Nome: " + doador.getNome());
+                                    System.out.println("CPF: " + doador.getCpf());
+                                    System.out.println("Data de nascimento: " + doador.getDataNascimento());
+                                    System.out.println("Sexo: " + doador.getSexo());
+                                    System.out.println("Endereço: " + doador.getEndereco());
+                                    System.out.println("Telefone: " + doador.getTelefone());
+                                    System.out.println("Email: " + doador.getEmail());
+                                    System.out.println("Tipo sanguíneo: " + doador.getTipoSanguineo());
+                                    System.out.println("Peso: " + doador.getPeso() + " kg");
+
+                                    //} else if (opcao_doador == 2){}
+
+                                } else {
+                                    System.out.println(" ❌ Doador de CPF " + cpf + "não encontrado.")
+                                }
+                            }
+                        }
+                    }
+                    break
+
+
                 case 5:
                     System.out.println("\nA encerrar o sistema BemDoado... Obrigado e até logo!");
                     break;
 
                 default:
-                    System.out.println("\n❌ Opção inválida. Por favor, introduz um número de 1 a 4.");
+                    System.out.println("\n❌ Opção inválida. Por favor, introduz um número de 1 a 5.");
                     break;
             }
         }
