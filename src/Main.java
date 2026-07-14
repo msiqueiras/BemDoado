@@ -103,46 +103,108 @@ public class Main {
                     break;
 
                 case 4:
-                    int opcao_doador = 0;
-                    while (opcao_doador < 3 && opcao_doador >= 0) {
-                        System.out.println("\n[4] Informe CPF do doador:");
-                        String cpf = EntradaUtils.lerCPF(scanner);
-                        for (Doador doador : listaDoadores) {
-                            if (cpf.equals(doador.getCpf())) {
-                                System.out.println("\n ===== DOADOR ENCONTRADO =====");
-                                System.out.println("Nome: " + doador.getNome());
-                                System.out.println("CPF: " + doador.getCpf());
-                                System.out.println("\n =============================");
+                    System.out.println("\n[4] Informe CPF do doador:");
+                    String cpf = EntradaUtils.lerCPF(scanner);
 
-                                Menu.exibirMenuDoador();
+                    Doador doadorProcurado = buscarDoadorPorCPF(listaDoadores, cpf);
 
-                                try {
-                                    opcao_doador = Integer.parseInt(scanner.nextLine());
-                                } catch (NumberFormatException e) {
-                                    opcao_doador = 0;
+                    if (doadorProcurado == null) {
+                        System.out.println("Doador com o CPF " + cpf + " não encontrado.");
+                        break;
+                    }
+
+                    int opcaoDoador = 0;
+
+                    while (opcaoDoador != 3) {
+
+                        System.out.println("\n===== DOADOR ENCONTRADO =====");
+                        System.out.println("Nome: " + doadorProcurado.getNome());
+                        System.out.println("CPF: " + doadorProcurado.getCpf());
+                        System.out.println("=============================");
+
+                        Menu.exibirMenuDoador();
+
+                        try {
+                            opcaoDoador = Integer.parseInt(scanner.nextLine());
+                        } catch (NumberFormatException e) {
+                            opcaoDoador = 0;
+                        }
+
+                        switch (opcaoDoador) {
+
+                            case 1:
+                                System.out.println("===== FICHA DE DOADOR =====");
+                                System.out.println("Nome: " + doadorProcurado.getNome());
+                                System.out.println("CPF: " + doadorProcurado.getCpf());
+                                System.out.println("Data de nascimento: " + doadorProcurado.getDataNascimento());
+                                System.out.println("Sexo: " + doadorProcurado.getSexo());
+                                System.out.println("Endereço: " + doadorProcurado.getEndereco());
+                                System.out.println("Telefone: " + doadorProcurado.getTelefone());
+                                System.out.println("Email: " + doadorProcurado.getEmail());
+                                System.out.println("Tipo sanguíneo: " + doadorProcurado.getTipoSanguineo());
+                                System.out.println("Peso: " + doadorProcurado.getPeso() + " kg");
+                                break;
+
+                            case 2:
+
+                                int opcaoAtualizacoesDoador = 0;
+                                while  (opcaoAtualizacoesDoador != 5) {
+                                    Menu.exibirMenuAtualizacoesDoador();
+
+                                    try {
+                                        opcaoAtualizacoesDoador = Integer.parseInt(scanner.nextLine());
+                                    } catch (NumberFormatException e) {
+                                        opcaoAtualizacoesDoador = 0;
+                                    }
+
+                                    switch (opcaoAtualizacoesDoador) {
+                                        case 1:
+                                            System.out.println("Digite o novo endereço: ");
+                                            String novoEndereco = scanner.nextLine();
+                                            doadorProcurado.atualizarEndereco(novoEndereco);
+                                            System.out.println("Endereço atualizado com SUCESSO!");
+                                            break;
+                                        case 2:
+                                            System.out.println("Digite o novo número de telefone: ");
+                                            String novoTelefone = EntradaUtils.lerTelefone(scanner);
+                                            doadorProcurado.atualizarTelefone(novoTelefone);
+                                            System.out.println("Telefone atualizado com SUCESSO!");
+                                            break;
+                                        case 3:
+                                            System.out.println("Digite o novo email: ");
+                                            String novoEmail = EntradaUtils.lerEmail(scanner);
+                                            doadorProcurado.atualizarEmail(novoEmail);
+                                            System.out.println("Email atualizado com SUCESSO!");
+                                            break;
+                                        case 4:
+                                            System.out.println("Digite o novo peso: ");
+                                            Double novoPeso = EntradaUtils.lerPeso(scanner);
+                                            doadorProcurado.atualizarPeso(novoPeso);
+                                            System.out.println("Peso atualizado com SUCESSO!");
+                                            break;
+                                        case 5:
+                                            System.out.println("Voltando ao menu de doador...");
+                                            break;
+                                        default:
+                                            System.out.println("Opção inválida.");
+                                            break;
+                                    }
+
                                 }
 
-                                if (opcao_doador == 1) {
-                                    System.out.println("===== FICHA DE DOADOR =====");
-                                    System.out.println("Nome: " + doador.getNome());
-                                    System.out.println("CPF: " + doador.getCpf());
-                                    System.out.println("Data de nascimento: " + doador.getDataNascimento());
-                                    System.out.println("Sexo: " + doador.getSexo());
-                                    System.out.println("Endereço: " + doador.getEndereco());
-                                    System.out.println("Telefone: " + doador.getTelefone());
-                                    System.out.println("Email: " + doador.getEmail());
-                                    System.out.println("Tipo sanguíneo: " + doador.getTipoSanguineo());
-                                    System.out.println("Peso: " + doador.getPeso() + " kg");
+                                break;
 
-                                    //} else if (opcao_doador == 2){}
+                            case 3:
+                                System.out.println("Voltando ao menu principal...");
+                                break;
 
-                                } else {
-                                    System.out.println(" ❌ Doador de CPF " + cpf + "não encontrado.")
-                                }
-                            }
+                            default:
+                                System.out.println("Opção inválida.");
+                                break;
                         }
                     }
-                    break
+
+                    break;
 
 
                 case 5:

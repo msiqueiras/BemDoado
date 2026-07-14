@@ -162,9 +162,9 @@ public class EntradaUtils {
 
             // Validaçoes: não vazio e formato
             if (email.isEmpty()){
-                throw new IllegalArgumentException("O Email nao pode estar vazio.");
+                throw new IllegalArgumentException("O Email não pode estar vazio.");
             } else if (!formatoValido) {
-                throw new IllegalArgumentException("O Email informado nao esta no formato adequado.");
+                throw new IllegalArgumentException("O Email informado não esta no formato adequado.");
             }
 
             valido = true;

@@ -23,14 +23,15 @@ public class Menu {
         System.out.print("Escolha uma opção: ");
     }
 
-    public static void exibirMenuDoadorFuncionalidades(){
+    public static void exibirMenuAtualizacoesDoador(){
         System.out.println("\n----------------------------------");
         System.out.println("          O QUE DESEJA ATUALIZAR?          ");
         System.out.println("----------------------------------");
         System.out.println("1 - Atualizar endereço");
-        System.out.println("2 - Atualizar email ");
-        System.out.println("3 - Atualizar telefone");
+        System.out.println("2 - Atualizar telefone");
+        System.out.println("3 - Atualizar email ");
         System.out.println("4 - Atualizar peso");
-        System.out.print("Escolha uma opção: ")
+        System.out.println("5 - Voltar ao menu de doador");
+        System.out.print("Escolha uma opção: ");
     }
 }
