@@ -11,6 +11,16 @@ import util.EntradaUtils;
 import views.Menu;
 
 public class Main {
+
+    public static Doador buscarDoadorPorCPF(List<Doador> listaDoadores, String cpf){
+        for (Doador doador : listaDoadores){
+            if (cpf.equals(doador.getCpf())) {
+                return doador;
+            }
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -18,16 +28,6 @@ public class Main {
         Estoque estoqueHemocentro = new Estoque(5);
         List<Doador> listaDoadores = new ArrayList<>();
         int opcao = 0;
-
-        public Doador buscarDoadorPorCPF(List<Doador> listaDoadores, String cpf){
-            for (Doador doador : listaDoadores){
-                if (cpf.equals(doador.getCpf())) {
-                        return doador;
-                }
-            }
-            return null;
-        }
-
 
         System.out.println("=== Bem-vindo ao sistema BemDoado! ===");
 
@@ -73,7 +73,7 @@ public class Main {
                         Doador novoDoador = new Doador(nome, cpf, dataNascimento, sexo, endereco, telefone, email, tipoSanguineo, peso, aptidao, autorizacao);
                         listaDoadores.add(novoDoador);
 
-                        System.out.println("✅ Doador '" + novoDoador.getNome() + "' cadastrado com sucesso!");
+                        System.out.println("\n✅ Doador '" + novoDoador.getNome() + "' cadastrado com sucesso!");
 
                     } catch (IllegalArgumentException e) {
                         System.out.println("❌ Erro: Algum dos valores digitados (Sexo, Tipo Sanguíneo ou Aptidão) está incorreto. Preste atenção no texto de exemplo.");
@@ -81,7 +81,7 @@ public class Main {
                     break;
 
                 case 2:
-                    System.out.println("\n[2] A Registar Doação...");
+                    System.out.println("\n[2] Registrando Doação...");
                     if (listaDoadores.isEmpty()) {
                         System.out.println("❌ Nenhum doador cadastrado no sistema. Por favor, utilize a Opção 1 primeiro.");
                     } else {
@@ -93,7 +93,7 @@ public class Main {
                     break;
 
                 case 3:
-                    System.out.println("\n[3] A Consultar Estoque...");
+                    System.out.println("\n[3] Consultando Estoque...");
                     System.out.println("Total de bolsas no estoque geral: " + estoqueHemocentro.getBolsas().size());
                     System.out.println("-> Bolsas A+: " + estoqueHemocentro.consultarEstoque(TipoSanguineo.A_POSITIVO));
                     System.out.println("-> Bolsas O+: " + estoqueHemocentro.consultarEstoque(TipoSanguineo.O_POSITIVO));
@@ -133,7 +133,7 @@ public class Main {
                         switch (opcaoDoador) {
 
                             case 1:
-                                System.out.println("===== FICHA DE DOADOR =====");
+                                System.out.println("\n===== FICHA DE DOADOR =====");
                                 System.out.println("Nome: " + doadorProcurado.getNome());
                                 System.out.println("CPF: " + doadorProcurado.getCpf());
                                 System.out.println("Data de nascimento: " + doadorProcurado.getDataNascimento());
@@ -159,31 +159,31 @@ public class Main {
 
                                     switch (opcaoAtualizacoesDoador) {
                                         case 1:
-                                            System.out.println("Digite o novo endereço: ");
+                                            System.out.print("\nDigite o novo endereço: ");
                                             String novoEndereco = scanner.nextLine();
                                             doadorProcurado.atualizarEndereco(novoEndereco);
                                             System.out.println("Endereço atualizado com SUCESSO!");
                                             break;
                                         case 2:
-                                            System.out.println("Digite o novo número de telefone: ");
+                                            System.out.print("\nDigite o novo número de telefone: ");
                                             String novoTelefone = EntradaUtils.lerTelefone(scanner);
                                             doadorProcurado.atualizarTelefone(novoTelefone);
                                             System.out.println("Telefone atualizado com SUCESSO!");
                                             break;
                                         case 3:
-                                            System.out.println("Digite o novo email: ");
+                                            System.out.print("\nDigite o novo email: ");
                                             String novoEmail = EntradaUtils.lerEmail(scanner);
                                             doadorProcurado.atualizarEmail(novoEmail);
                                             System.out.println("Email atualizado com SUCESSO!");
                                             break;
                                         case 4:
-                                            System.out.println("Digite o novo peso: ");
+                                            System.out.print("\nDigite o novo peso: ");
                                             Double novoPeso = EntradaUtils.lerPeso(scanner);
                                             doadorProcurado.atualizarPeso(novoPeso);
                                             System.out.println("Peso atualizado com SUCESSO!");
                                             break;
                                         case 5:
-                                            System.out.println("Voltando ao menu de doador...");
+                                            System.out.println("\nVoltando ao menu de doador...");
                                             break;
                                         default:
                                             System.out.println("Opção inválida.");
@@ -195,7 +195,7 @@ public class Main {
                                 break;
 
                             case 3:
-                                System.out.println("Voltando ao menu principal...");
+                                System.out.println("\nVoltando ao menu principal...");
                                 break;
 
                             default:
@@ -208,11 +208,11 @@ public class Main {
 
 
                 case 5:
-                    System.out.println("\nA encerrar o sistema BemDoado... Obrigado e até logo!");
+                    System.out.println("\nEncerrando o sistema BemDoado... Obrigado e até logo!");
                     break;
 
                 default:
-                    System.out.println("\n❌ Opção inválida. Por favor, introduz um número de 1 a 5.");
+                    System.out.println("\n❌ Opção inválida. Por favor, digite um número de 1 a 5.");
                     break;
             }
         }

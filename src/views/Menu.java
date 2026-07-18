@@ -19,13 +19,13 @@ public class Menu {
         System.out.println("----------------------------------");
         System.out.println("1 - Visualizar dados completos");
         System.out.println("2 - Atualizar dados ");
-        System.out.println("3 - Voltar ao mennu principal");
+        System.out.println("3 - Voltar ao menu principal");
         System.out.print("Escolha uma opção: ");
     }
 
     public static void exibirMenuAtualizacoesDoador(){
         System.out.println("\n----------------------------------");
-        System.out.println("          O QUE DESEJA ATUALIZAR?          ");
+        System.out.println("      O QUE DESEJA ATUALIZAR?      ");
         System.out.println("----------------------------------");
         System.out.println("1 - Atualizar endereço");
         System.out.println("2 - Atualizar telefone");
