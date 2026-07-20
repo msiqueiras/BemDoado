@@ -244,4 +244,26 @@ public class EntradaUtils {
     }
     return resultadoAptidao;
     }
+
+    public static boolean lerAutorizacao(Scanner scanner) {
+    boolean autorizacao = false;
+    boolean valido = false;
+
+    while (!valido) {
+        try {
+            System.out.print("Possui autorização de um responsável? \n(digite 1 para POSSUI e 0 para NAO POSSUI): ");
+            autorizacao = Boolean.parseBoolean(scanner.nextLine());
+
+            valido = true;
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro: valor invalido. Tente novamente.");
+        } catch (Exception e) {
+            // Captura qualquer outra exceção inesperada
+            System.out.println("Erro inesperado: " + e.getMessage() + " Tente novamente.");
+        }
+    }
+    return autorizacao;
+    }
+
 }

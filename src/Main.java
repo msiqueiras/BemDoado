@@ -44,40 +44,35 @@ public class Main {
             switch (opcao) {
                 case 1:
                     System.out.println("\n--- Cadastro de Novo Doador ---");
-                    try {
-                        String nome = EntradaUtils.lerNome(scanner);
+                    
+                    String nome = EntradaUtils.lerNome(scanner);
 
-                        String cpf = EntradaUtils.lerCPF(scanner);
+                    String cpf = EntradaUtils.lerCPF(scanner);
 
-                        LocalDate dataNascimento = EntradaUtils.lerData(scanner);
+                    LocalDate dataNascimento = EntradaUtils.lerData(scanner);
 
-                        Sexo sexo = EntradaUtils.lerSexo(scanner);
+                    Sexo sexo = EntradaUtils.lerSexo(scanner);
 
-                        System.out.print("Endereço: ");
-                        String endereco = scanner.nextLine();
+                    System.out.print("Endereço: ");
+                    String endereco = scanner.nextLine();
 
-                        String telefone = EntradaUtils.lerTelefone(scanner);
+                    String telefone = EntradaUtils.lerTelefone(scanner);
 
-                        String email = EntradaUtils.lerEmail(scanner);
+                    String email = EntradaUtils.lerEmail(scanner);
 
-                        TipoSanguineo tipoSanguineo = EntradaUtils.lerTipoSanguineo(scanner);
+                    TipoSanguineo tipoSanguineo = EntradaUtils.lerTipoSanguineo(scanner);
 
-                        double peso = EntradaUtils.lerPeso(scanner);
+                    double peso = EntradaUtils.lerPeso(scanner);
 
-                        ResultadoAptidao aptidao = EntradaUtils.lerResultadoAptidao(scanner);
+                    ResultadoAptidao aptidao = EntradaUtils.lerResultadoAptidao(scanner);
+                        
+                    boolean autorizacao = EntradaUtils.lerAutorizacao(scanner);
 
-                        System.out.print("Possui autorização de um responsável? (true ou false): ");
-                        boolean autorizacao = Boolean.parseBoolean(scanner.nextLine());
+                    // Cria o objeto doador com os dados digitados
+                    Doador novoDoador = new Doador(nome, cpf, dataNascimento, sexo, endereco, telefone, email, tipoSanguineo, peso, aptidao, autorizacao);
+                    listaDoadores.add(novoDoador);
 
-                        // Cria o objeto doador com os dados digitados
-                        Doador novoDoador = new Doador(nome, cpf, dataNascimento, sexo, endereco, telefone, email, tipoSanguineo, peso, aptidao, autorizacao);
-                        listaDoadores.add(novoDoador);
-
-                        System.out.println("\n✅ Doador '" + novoDoador.getNome() + "' cadastrado com sucesso!");
-
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("❌ Erro: Algum dos valores digitados (Sexo, Tipo Sanguíneo ou Aptidão) está incorreto. Preste atenção no texto de exemplo.");
-                    }
+                    System.out.println("\n✅ Doador '" + novoDoador.getNome() + "' cadastrado com sucesso!");
                     break;
 
                 case 2:
@@ -104,7 +99,7 @@ public class Main {
 
                 case 4:
                     System.out.println("\n[4] Informe CPF do doador:");
-                    String cpf = EntradaUtils.lerCPF(scanner);
+                    cpf = EntradaUtils.lerCPF(scanner);
 
                     Doador doadorProcurado = buscarDoadorPorCPF(listaDoadores, cpf);
 
