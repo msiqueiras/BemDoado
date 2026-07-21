@@ -91,7 +91,13 @@ public class Main {
                     System.out.println("\n[3] Consultando Estoque...");
                     System.out.println("Total de bolsas no estoque geral: " + estoqueHemocentro.getBolsas().size());
                     System.out.println("-> Bolsas A+: " + estoqueHemocentro.consultarEstoque(TipoSanguineo.A_POSITIVO));
+                    System.out.println("-> Bolsas A-: " + estoqueHemocentro.consultarEstoque(TipoSanguineo.A_NEGATIVO));
+                    System.out.println("-> Bolsas B+: " + estoqueHemocentro.consultarEstoque(TipoSanguineo.B_POSITIVO));
+                    System.out.println("-> Bolsas B-: " + estoqueHemocentro.consultarEstoque(TipoSanguineo.B_NEGATIVO));
+                    System.out.println("-> Bolsas AB+: " + estoqueHemocentro.consultarEstoque(TipoSanguineo.AB_POSITIVO));
+                    System.out.println("-> Bolsas AB-: " + estoqueHemocentro.consultarEstoque(TipoSanguineo.AB_NEGATIVO));
                     System.out.println("-> Bolsas O+: " + estoqueHemocentro.consultarEstoque(TipoSanguineo.O_POSITIVO));
+                    System.out.println("-> Bolsas O-: " + estoqueHemocentro.consultarEstoque(TipoSanguineo.O_NEGATIVO));
 
                     // Verifica se o alerta precisa de disparar
                     estoqueHemocentro.emitirAlerta();
