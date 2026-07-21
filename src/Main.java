@@ -84,14 +84,26 @@ public class Main {
                     }
 
                 case 2:
-                    System.out.println("\n[2] Registrando Doação...");
+                    System.out.println("\n[2] Iniciando o processo de doação...");
                     if (listaDoadores.isEmpty()) {
                         System.out.println("❌ Nenhum doador cadastrado no sistema. Por favor, utilize a Opção 1 primeiro.");
                     } else {
-                        // Para simplificar, pega o último doador cadastrado
-                        Doador doadorAtual = listaDoadores.get(listaDoadores.size() - 1);
-                        System.out.println("Iniciando doação de: " + doadorAtual.getNome());
-                        doadorAtual.realizarDoacao(false, false, estoqueHemocentro);
+                        System.out.println("Digite o cpf do doador: ");
+                        String cpfDoador =  EntradaUtils.lerCPF(scanner);
+                        Doador potencialDoador = buscarDoadorPorCPF(listaDoadores, cpfDoador);
+
+                        if (potencialDoador != null) {
+                            System.out.println("Doador realizou o voto de autoexclusão? (true - sim | false - não) : ");
+                            boolean votoAutoexclusao = EntradaUtils.lerRespostaBooleana(scanner);
+
+                            System.out.println("Houve intercorrências com o doador e/ou com o sangue durante a doação? (true - sim | false - não) : ");
+                            boolean intercorrencias = EntradaUtils.lerRespostaBooleana(scanner);
+
+                            System.out.println("Registrando doação de " + potencialDoador.getNome() + "...");
+                            potencialDoador.realizarDoacao(votoAutoexclusao, intercorrencias, estoqueHemocentro);
+                        } else {
+                            System.out.println("Doador não encontrado no banco de dados.");
+                        }
                     }
                     break;
 
