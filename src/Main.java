@@ -49,31 +49,39 @@ public class Main {
 
                     String cpf = EntradaUtils.lerCPF(scanner);
 
-                    LocalDate dataNascimento = EntradaUtils.lerData(scanner);
+                    Doador doadorValidacao = buscarDoadorPorCPF(listaDoadores, cpf);
 
-                    Sexo sexo = EntradaUtils.lerSexo(scanner);
+                    if (doadorValidacao == null) {
 
-                    System.out.print("Endereço: ");
-                    String endereco = scanner.nextLine();
+                        LocalDate dataNascimento = EntradaUtils.lerData(scanner);
 
-                    String telefone = EntradaUtils.lerTelefone(scanner);
+                        Sexo sexo = EntradaUtils.lerSexo(scanner);
 
-                    String email = EntradaUtils.lerEmail(scanner);
+                        System.out.print("Endereço: ");
+                        String endereco = scanner.nextLine();
 
-                    TipoSanguineo tipoSanguineo = EntradaUtils.lerTipoSanguineo(scanner);
+                        String telefone = EntradaUtils.lerTelefone(scanner);
 
-                    double peso = EntradaUtils.lerPeso(scanner);
+                        String email = EntradaUtils.lerEmail(scanner);
 
-                    ResultadoAptidao aptidao = EntradaUtils.lerResultadoAptidao(scanner);
-                        
-                    boolean autorizacao = EntradaUtils.lerAutorizacao(scanner);
+                        TipoSanguineo tipoSanguineo = EntradaUtils.lerTipoSanguineo(scanner);
 
-                    // Cria o objeto doador com os dados digitados
-                    Doador novoDoador = new Doador(nome, cpf, dataNascimento, sexo, endereco, telefone, email, tipoSanguineo, peso, aptidao, autorizacao);
-                    listaDoadores.add(novoDoador);
+                        double peso = EntradaUtils.lerPeso(scanner);
 
-                    System.out.println("\n✅ Doador '" + novoDoador.getNome() + "' cadastrado com sucesso!");
-                    break;
+                        ResultadoAptidao aptidao = EntradaUtils.lerResultadoAptidao(scanner);
+
+                        boolean autorizacao = EntradaUtils.lerAutorizacao(scanner);
+
+                        // Cria o objeto doador com os dados digitados
+                        Doador novoDoador = new Doador(nome, cpf, dataNascimento, sexo, endereco, telefone, email, tipoSanguineo, peso, aptidao, autorizacao);
+                        listaDoadores.add(novoDoador);
+
+                        System.out.println("\n✅ Doador '" + novoDoador.getNome() + "' cadastrado com sucesso!");
+                        break;
+                    } else {
+                        System.out.println("❌ Doador com cpf " + cpf + " já cadastrado no banco de dados.");
+                        break;
+                    }
 
                 case 2:
                     System.out.println("\n[2] Registrando Doação...");
