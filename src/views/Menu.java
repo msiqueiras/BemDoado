@@ -18,8 +18,9 @@ public class Menu {
         System.out.println("          MENU DOADOR          ");
         System.out.println("----------------------------------");
         System.out.println("1 - Visualizar dados completos");
-        System.out.println("2 - Atualizar dados ");
-        System.out.println("3 - Voltar ao menu principal");
+        System.out.println("2 - Atualizar dados");
+        System.out.println("3 - Consultar histórico de doações");
+        System.out.println("4 - Voltar ao menu principal");
         System.out.print("Escolha uma opção: ");
     }
 

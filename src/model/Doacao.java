@@ -20,9 +20,9 @@ public class Doacao {
     public LocalDate getDataColeta() { return dataColeta; }
     public void setDataColeta(LocalDate dataColeta) { this.dataColeta = dataColeta; }
 
-    public boolean isVotoAutoexclusao() { return votoAutoExclusao; }
+    public boolean getVotoAutoexclusao() { return votoAutoExclusao; }
     public void setVotoAutoexclusao(boolean votoAutoexclusao) { this.votoAutoExclusao = votoAutoexclusao; }
 
-    public boolean isIntercorrencias() { return intercorrencias; }
+    public boolean getIntercorrencias() { return intercorrencias; }
     public void setIntercorrencias(boolean intercorrencias) { this.intercorrencias = intercorrencias; }
 }

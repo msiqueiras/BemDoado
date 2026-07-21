@@ -2,11 +2,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import model.Doador;
-import model.Estoque;
-import model.ResultadoAptidao;
-import model.Sexo;
-import model.TipoSanguineo;
+
+import model.*;
 import util.EntradaUtils;
 import views.Menu;
 
@@ -136,7 +133,7 @@ public class Main {
 
                     int opcaoDoador = 0;
 
-                    while (opcaoDoador != 3) {
+                    while (opcaoDoador != 4) {
 
                         System.out.println("\n===== DOADOR ENCONTRADO =====");
                         System.out.println("Nome: " + doadorProcurado.getNome());
@@ -216,6 +213,23 @@ public class Main {
                                 break;
 
                             case 3:
+                                System.out.println("---- HISTÓRICO DOAÇÕES -----");
+                                int count = 1;
+                                if (doadorProcurado.getDoacoes().isEmpty()){
+                                    System.out.println("AINDA NÃO EXISTEM REGISTROS DE DOAÇÃO DESSE DOADOR");
+                                } else {
+                                    for (Doacao doacao : doadorProcurado.getDoacoes()) {
+                                        System.out.println("----- DOAÇÃO #" + count + " -----");
+                                        System.out.println("Data: " + doacao.getDataColeta());
+                                        System.out.println("Houve intercorrências: " + doacao.getIntercorrencias());
+                                        System.out.println("Houve autoexclusão: " + doacao.getVotoAutoexclusao());
+                                        count++;
+                                    }
+                                }
+
+                                break;
+
+                            case 4:
                                 System.out.println("\nVoltando ao menu principal...");
                                 break;
 
@@ -224,9 +238,7 @@ public class Main {
                                 break;
                         }
                     }
-
                     break;
-
 
                 case 5:
                     System.out.println("\nEncerrando o sistema BemDoado... Obrigado e até logo!");
